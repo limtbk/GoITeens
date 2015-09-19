@@ -8,9 +8,9 @@ def setup():
     dt = 1.0
     gobjects = []
     mp = False
-#     gobjects.append(Square(100.0, 100.0, 1.0, 1.5, 0.0, 0.1, 1.0, 20.0))
-#     gobjects.append(Ellipse(120.0, 120.0, 0.5, 1.5, 0.0, 0.03, 1.0, 10.0, 20.0))
-#     gobjects.append(PhysicObject(0.0, 0.0, 1.1, 1.5, 0.0, 0.0, 1.0))
+    gobjects.append(Square(64, 100.0, 100.0, 1.0, 1.5, 0.0, 0.1, 1.0, 20.0))
+    gobjects.append(Ellipse(100, 120.0, 120.0, 0.5, 1.5, 0.0, 0.03, 1.0, 10.0, 20.0))
+    gobjects.append(PhysicObject(128, 0.0, 0.0, 1.1, 1.5, 0.0, 0.0, 1.0))
     
 def draw():
     global mp
@@ -24,40 +24,39 @@ def draw():
     line(0, height, mouseX, mouseY)
 
     if mousePressed:
-        if not mp:
+        if not mp: # Prevent creating more than 1 object on mouse press
             mp = True
             gobjects.append(Circle(frameCount % 255, 0.0, 0.0, (mouseX) / 50.0, (height - mouseY) / 50.0, 0.0, 0.0, 1.0, 10.0))
     else:
         mp = False        
     
+    # Recalculate and redraw all objects
     for g in gobjects:
         g.display()
     
     for g in gobjects:
         g.update()
-        
+
+    # Collision detection between circles            
     for i in range(len(gobjects)):
         for j in range(i+1, len(gobjects)):
             g1 = gobjects[i]
             g2 = gobjects[j]
             if g1 != g2:
                 d = sqrt((g1.x - g2.x) * (g1.x - g2.x) + (g1.y - g2.y) * (g1.y - g2.y))
-                if d < g1.r + g2.r:
-                    tx = g1.vx
-                    g1.vx = g2.vx
-                    g2.vx = tx
-                    ty = g1.vy
-                    g1.vy = g2.vy
-                    g2.vy = ty
-                    d = sqrt((g1.x - g2.x) * (g1.x - g2.x) + (g1.y - g2.y) * (g1.y - g2.y))
-                    while d < g1.r + g2.r:
+                if hasattr(g1, 'r') and hasattr(g2, 'r'):
+                    if d < g1.r + g2.r:
+                        tx = g1.vx
+                        g1.vx = g2.vx
+                        g2.vx = tx
+                        ty = g1.vy
+                        g1.vy = g2.vy
+                        g2.vy = ty
+                        d = sqrt((g1.x - g2.x) * (g1.x - g2.x) + (g1.y - g2.y) * (g1.y - g2.y))
                         g1.display()
                         g2.display()
                         g1.update()
                         g2.update()
-                        d = sqrt((g1.x - g2.x) * (g1.x - g2.x) + (g1.y - g2.y) * (g1.y - g2.y))
-                
-        
                         
 class PhysicObject(object):
     def __init__(self, c, x, y, vx, vy, a, va, m):
@@ -129,7 +128,7 @@ class Ellipse(PhysicObject):
         
 class Rect(PhysicObject):
     def __init__(self, c, x, y, vx, vy, a, va, m, w, h):
-        super(Square, self).__init__(c, x, y, vx, vy, a, va, m)
+        super(Rect, self).__init__(c, x, y, vx, vy, a, va, m)
         self.w = w #width and height
         self.h = h #width and height
     
