@@ -118,7 +118,7 @@ class Maze(object):
     def go(self, x, y):
         s = self.map[y][x]
         if s != "#":
-            delay(10)
+            delay(50)
             self.tr.x = x
             self.tr.y = y
             if s != "#":
