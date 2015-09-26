@@ -28,7 +28,7 @@ def draw():
     ellipse(tx + 10, height - ty - 10, 20, 20)
 
     t = t + 1
-    if mousePressed:
+    if not f and mousePressed:
         f = True
         vx = (mouseX - x) / 50.0
         vy = ((height - mouseY) - y) / 50.0
