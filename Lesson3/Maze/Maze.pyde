@@ -29,8 +29,6 @@ def setup():
              
 def solveMaze():
     maze.goRight()
-    pass
-    
                                   
 def draw():
     pass
@@ -80,44 +78,21 @@ class Maze(object):
         self.tr.show()
         
     def goLeft(self):
-        newX = self.tr.x - 1;
-        newY = self.tr.y;
-        if self.map[newY][newX] != "#":
-            self.tr.x = newX
-            self.tr.y = newY
-            self.map[self.tr.y][self.tr.x] = "."
-            self.show()
-            return True
-        return False
+        return self.go(self.tr.x - 1, self.tr.y)
 
     def goRight(self):
-        newX = self.tr.x + 1;
-        newY = self.tr.y;
-        if self.map[newY][newX] != "#":
-            self.tr.x = newX
-            self.tr.y = newY
-            self.map[self.tr.y][self.tr.x] = "."
-            self.show()
-            return True
-        return False
+        return self.go(self.tr.x + 1, self.tr.y)
 
     def goUp(self):
-        newX = self.tr.x;
-        newY = self.tr.y - 1;
-        if self.map[newY][newX] != "#":
-            self.tr.x = newX
-            self.tr.y = newY
-            self.map[self.tr.y][self.tr.x] = "."
-            self.show()
-            return True
-        return False
+        return self.go(self.tr.x, self.tr.y - 1)
 
     def goDown(self):
-        newX = self.tr.x;
-        newY = self.tr.y + 1;
-        if self.map[newY][newX] != "#":
-            self.tr.x = newX
-            self.tr.y = newY
+        return self.go(self.tr.x, self.tr.y + 1)
+    
+    def go(self, x, y):
+        if self.map[y][x] != "#":
+            self.tr.x = x
+            self.tr.y = y
             self.map[self.tr.y][self.tr.x] = "."
             self.show()
             return True
