@@ -6,28 +6,28 @@ def setup():
     "################################",
     "#    #   #       #          #  #",
     "#### # # # ##### # ### #### #  #",
-    "#      #   #     # # # #    #  #",
+    "#      #   #     # # # #    # ##",
     "## ########### ### ### ######  #",
-    "#  #        #                  #",
-    "# ## ###### #########          #",
-    "#  #  #   # #                  #",
-    "## ####   # #                  #",
-    "#         ###                  #",
-    "#                              #",
-    "#                              #",
-    "#                              #",
-    "#                              #",
-    "#                             *#",
+    "#  #        #          #    ## #",
+    "# ## ###### ######## #    #    #",
+    "#  #  #   # #   #  # ###########",
+    "## #### # # # #    # #         #",
+    "#  #    # ### # #### # # ##### #",
+    "# ## ####   # #      # # #   # #",
+    "# #     # # # ######## # ##### #",
+    "# # ##  # # #    #   # #       #",
+    "# # #  ## # #### # # # # #######",
+    "#   #  #  #    #   #   #      *#",
     "################################"])
     tr = Traveller(1, 1, maze)
-    size(len(maze[0])*mx, len(maze)*my)
-#     frameRate(30)
+    size(maze.width*mx, maze.height*my)
+    frameRate(30)
     background(20)
-    
-                    
-def draw():
     maze.show()
     tr.show()
+                    
+def draw():
+    pass
          
 def delay(ms):
     time = millis()
@@ -41,9 +41,9 @@ class Maze(object):
         self.width = len(map[0])
         
     def show(self):
-        for y in range(0, len(map)):
-            cs = map[y]
-            for x in range(0, len(cs)):
+        for y in range(0, self.height):
+            cs = self.map[y]
+            for x in range(0, self.width):
                 s = cs[x]
                 if s == "#":
                     noStroke()
