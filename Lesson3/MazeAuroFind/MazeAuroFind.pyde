@@ -6,13 +6,13 @@ def setup():
     "################################",
     "#    #   #       #          #  #",
     "#### # # # ##### # ### #### #  #",
-    "#      #   #     # # # #    # ##",
+    "#      #   #     # #   #    # ##",
     "## ########### ### ### ######  #",
     "#  #        #          #    ## #",
-    "# ## ###### ######## #    #    #",
+    "# ## ### ## ######## #    #    #",
     "#  #  #   # #   #  # ###########",
     "## #### # # # #    # #         #",
-    "#  #    # ### # #### # # ##### #",
+    "#  #    # ### # #### # # ## ## #",
     "# ## ####   # #      # # #   # #",
     "# #     # # # ######## # ##### #",
     "# # ##  # # #    #   # #       #",
@@ -27,19 +27,19 @@ def setup():
     noLoop()
              
 def solveMaze():
-    if maze.lookLeft() != "#" and maze.lookLeft() != ".":
+    if maze.lookLeft() != "#" and maze.lookLeft() != "." and maze.lookLeft() != ",":
         maze.goLeft()
         solveMaze()
         maze.goRight()
-    if maze.lookRight() != "#" and maze.lookRight() != ".":
+    if maze.lookRight() != "#" and maze.lookRight() != "." and maze.lookRight() != ",":
         maze.goRight()
         solveMaze()
         maze.goLeft()
-    if maze.lookUp() != "#" and maze.lookUp() != ".":
+    if maze.lookUp() != "#" and maze.lookUp() != "." and maze.lookUp() != ",":
         maze.goUp()
         solveMaze()
         maze.goDown()
-    if maze.lookDown() != "#" and maze.lookDown() != ".":
+    if maze.lookDown() != "#" and maze.lookDown() != "." and maze.lookDown() != ",":
         maze.goDown()
         solveMaze()
         maze.goUp()
@@ -132,7 +132,7 @@ class Maze(object):
     def go(self, x, y):
         s = self.map[y][x]
         if s != "#":
-            delay(50)
+            delay(5)
             self.tr.x = x
             self.tr.y = y
             if s != "#":
