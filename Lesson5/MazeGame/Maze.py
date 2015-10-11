@@ -20,26 +20,28 @@ class Maze(object):
                 s = cs[x]
                 if 'A'<=s and s<='Z':
                     self.players[s] = [x, y]
+        self.imgDict = {"#":loadImage("Brick32.png"), "*":loadImage("Chest32.gif")}
+        self.plImgDict = {"A":loadImage("Okay32.png"), "B":loadImage("Troll32.png")}
         
         print self.players           
         
     def show(self):
-        brickImg = loadImage("Brick32.png");
-        okaymanImg = loadImage("Okay32.png");
-        trollmanImg = loadImage("Troll32.png");
-        chestImg = loadImage("Chest32.gif");
-        imgs = {"A":okaymanImg, "B":trollmanImg, "#":brickImg, "*":chestImg}
         
         for y in range(0, self.height):
             cs = self.map[y]
             for x in range(0, self.width):
                 s = cs[x]
-                if s == " ":
+                if s != "#":
                     noStroke()
                     fill(0, 0, 0)
                     rectMode(CORNERS)
                     rect(x*self.mx, y*self.my, x*self.mx+self.mx, y*self.my+self.my)
-                img = imgs.get(s, None)
+                img = self.imgDict.get(s, None)
+                if img:
+                    image(img, x*self.mx, y*self.my, self.mx, self.my)
+            for playerName, coord in self.players.iteritems():
+                x, y = coord
+                img = self.plImgDict.get(playerName, None)
                 if img:
                     image(img, x*self.mx, y*self.my, self.mx, self.my)
                     
@@ -58,23 +60,25 @@ class Maze(object):
     def go(self, player, d):
         px, py = self.players[player]
         
-        x, y = px, py
+        dx, dy = 0, 0
         if d == 0:
-            x = x - 1
+            dx = -1
         if d == 1:
-            x = x + 1
+            dx = 1
         if d == 2:
-            y = y - 1
+            dy = -1
         if d == 3:
-            y = y + 1
+            dy = 1
 
-        s = self.map[y][x]
-
+        s = self.map[int(py + dy)][int(px + dx)]
         if s == " ":
+            for i in range(100):
+                self.players[player] = [px + (dx / 100.0) * i, py + (dy / 100.0) * i]
+                time.sleep(0.001)
+            self.players[player] = [px + dx, py + dy]
+
             self.map[py][px] = " "
-            self.map[y][x] = player
-            
-            self.players[player] = [x, y]
+            self.map[int(py + dy)][int(px + dx)] = player
                 
 #         if player == "A":
 #             if s == "*":
