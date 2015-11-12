@@ -13,8 +13,8 @@ def setup():
     lastkey = ''
     mx = 32
     my = 32
-    wx = 33
-    wy = 31
+    wx = 25
+    wy = 25
 
     mazearr = genmaze(wx, wy, 7, 3, [(1, 1), (wx - 2, wy - 2), (1, wy - 2), (wx - 2, 1)])
     maze = Maze(mazearr, mx, my)
