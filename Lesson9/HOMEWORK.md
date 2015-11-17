@@ -57,3 +57,10 @@ print cmath.exp(-1j*cmath.pi)+1 # получится очень маленько
 
 Результат (файл с исходным кодом) положить в репозиторий, созданный ранее
 [![Create repo with smartgit](http://img.youtube.com/vi/eOjur6a-OL0/0.jpg)](https://www.youtube.com/watch?v=eOjur6a-OL0)
+
+Установка SmartGit:
+[![Install smartgit](http://img.youtube.com/vi/b2aC6c6DrMo/0.jpg)](https://www.youtube.com/watch?v=b2aC6c6DrMo)
+
+
+Код желательно писать в Idea Community Edition. Установка Idea:
+[![Install Idea](http://img.youtube.com/vi/pLhzq6HA6NI/0.jpg)](https://www.youtube.com/watch?v=pLhzq6HA6NI)
