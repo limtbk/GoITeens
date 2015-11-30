@@ -104,6 +104,7 @@ class Maze(object):
 
             self.map[py][px] = " "
             self.map[int(py + dy)][int(px + dx)] = player
+            return True
                 
         if player == "A":
             if s == "*":
@@ -113,7 +114,6 @@ class Maze(object):
             if s == "A":
                 self.win = player
 
-            return True
         return False    
 
     def startGame(self):
